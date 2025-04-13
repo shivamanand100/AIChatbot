@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: my-flask-app  # your app name
+    name: my-flask-app  # ✅ change to your app name
     env: python
     plan: free
     buildCommand: |
@@ -10,7 +10,7 @@ services:
       curl https://sh.rustup.rs -sSf | sh -s -- -y
       source $HOME/.cargo/env
       pip install --prefer-binary -r requirements.txt
-    startCommand: gunicorn app:app  # change to match your Flask app file
+    startCommand: gunicorn app:app  # ✅ change to match your main Python file
     envVars:
       - key: CARGO_HOME
         value: /opt/render/project/.cargo
