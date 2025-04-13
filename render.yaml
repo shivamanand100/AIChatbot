@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: my-flask-app  # your app name
+    env: python
+    plan: free
+    buildCommand: |
+      export CARGO_HOME=$HOME/.cargo
+      export RUSTUP_HOME=$HOME/.rustup
+      mkdir -p $CARGO_HOME $RUSTUP_HOME
+      curl https://sh.rustup.rs -sSf | sh -s -- -y
+      source $HOME/.cargo/env
+      pip install --prefer-binary -r requirements.txt
+    startCommand: gunicorn app:app  # change to match your Flask app file
+    envVars:
+      - key: CARGO_HOME
+        value: /opt/render/project/.cargo
+      - key: RUSTUP_HOME
+        value: /opt/render/project/.rustup
